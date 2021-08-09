@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 
 public class MiraiConsoleGradlePlugin : Plugin<Project> {
     private fun KotlinSourceSet.configureSourceSet(project: Project, target: KotlinTarget) {
-        languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
+        languageSettings.optIn("kotlin.RequiresOptIn")
         dependencies { configureDependencies(project, this@configureSourceSet, target) }
     }
 
@@ -81,6 +81,8 @@ public class MiraiConsoleGradlePlugin : Plugin<Project> {
             if (isJvm) {
                 when (miraiExtension.useTestConsoleFrontEnd) {
                     MiraiConsoleFrontEndKind.TERMINAL -> api("net.mamoe:mirai-console-terminal:${miraiExtension.consoleVersion}")
+                    null -> {
+                    }
                 }
             }
         }
